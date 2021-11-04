@@ -5,19 +5,42 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MIW_ProductService.Api.Controllers;
-using MIW_ProductService.Api.Controllers;
+using MIW_ProductService.Core.Services.Interfaces;
+using MIW_ProductService.Dal.Contexts;
 
 namespace MIW_ProductService.Api
 {
     public class Startup
     {
+    
+        public Startup(IConfiguration configuration, ProductContext productContext)
+        {
+            Configuration = configuration;
+            ProductContext = productContext;
+        }
+        
+        public IConfiguration Configuration { get; }
+        public ProductContext ProductContext { get;  }
+                
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            string server = Configuration.GetSection("Mysql")["Server"];
+            string username = Configuration.GetSection("Mysql")["Username"];
+            string password = Configuration.GetSection("Mysql")["Password"];
+            string database = Configuration.GetSection("Mysql")["Database"];
+            string connectionString = $"server={server};user={username};password={password};database={database}";
+            services.AddDbContext<ProductContext>(builder =>
+                builder.UseMySQL(connectionString));
+            
+            services.AddTransient<IProductService, Core.Services.ProductService>();
+            
             services.AddGrpc();
         }
 
@@ -28,6 +51,8 @@ namespace MIW_ProductService.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            ProductContext.Database.EnsureCreated();
 
             app.UseRouting();
 
