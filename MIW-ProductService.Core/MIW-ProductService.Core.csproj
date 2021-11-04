@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>MIW_ProductService.Core</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MIW-ProductService.Dal\MIW-ProductService.Dal.csproj" />
+      <ProjectReference Include="..\MIW-ProductService.Messaging\MIW-ProductService.Messaging.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Mappers" />
+    </ItemGroup>
+
+</Project>
