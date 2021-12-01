@@ -2,9 +2,9 @@
   "profiles": {
     "MIW-ProductService.Api": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
+      "dotnetRunMessages": "true",
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:5007;https://localhost:5006",
+      "applicationUrl": "http://localhost:5011;https://localhost:5010",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -43,14 +43,14 @@ namespace MIW_ProductService.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ProductContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ProductContext db)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            context.Database.EnsureCreated();
+            db.Database.EnsureCreated();
 
             app.UseRouting();
 
