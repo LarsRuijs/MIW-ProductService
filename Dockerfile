@@ -11,5 +11,5 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=build-env /app/output .
 
-EXPOSE 5006
+EXPOSE 5010
 ENTRYPOINT ["dotnet", "MIW-ProductService.Api.dll"]
