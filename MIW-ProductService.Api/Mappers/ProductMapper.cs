@@ -6,7 +6,7 @@ namespace MIW_ProductService.Api.Mappers
 {
     public class ProductMapper
     {
-        public static ProductResponse ProductToProductResponse(Product product)
+        public static ProductMessage ProductToProductResponse(Product product)
         {
             return new()
             {

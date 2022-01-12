@@ -3,9 +3,9 @@ syntax = "proto3";
 option csharp_namespace = "MIW_ProductService.Api";
 
 service ProductService {
-  rpc CreateProduct (CreateProductRequest) returns (ProductResponse);
-  rpc GetAllProducts (GetAllProductsRequest) returns (stream ProductResponse);
-  rpc GetSingleProduct (GetSingleProductRequest) returns (ProductResponse);
+  rpc CreateProduct (CreateProductRequest) returns (ProductMessage);
+  rpc GetAllProducts (GetAllProductsRequest) returns (stream ProductMessage);
+  rpc GetSingleProduct (GetSingleProductRequest) returns (ProductMessage);
 }
 
 message CreateProductRequest {
@@ -24,7 +24,7 @@ message GetSingleProductRequest {
   int64 id = 1;
 }
 
-message ProductResponse {
+message ProductMessage {
   int64 id = 1;
   string name = 2;
   string company = 3;
@@ -34,5 +34,5 @@ message ProductResponse {
 }
 
 message MultipleProductsResponse {
-  repeated ProductResponse products = 1;
+  repeated ProductMessage products = 1;
 }

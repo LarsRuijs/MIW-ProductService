@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using MIW_ProductService.Core.Services.Interfaces;
 using MIW_ProductService.Dal.Contexts;
 using MIW_ProductService.Dal.Models;
+using MIW_ProductService.Messaging;
 
 namespace MIW_ProductService.Core.Services
 {
@@ -51,8 +52,9 @@ namespace MIW_ProductService.Core.Services
         {
             try
             {
-                await _productContext.AddAsync(product);
+                var newProduct = await _productContext.AddAsync(product);
                 await _productContext.SaveChangesAsync();
+                CreateProductSender.Send(newProduct.Entity);
                 return product;
             }
             catch (Exception e)
